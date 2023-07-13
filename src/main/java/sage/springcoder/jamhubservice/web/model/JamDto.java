@@ -24,10 +24,10 @@ public class JamDto {
 
     private JamFlavorEnum jamFlavor;
 
- private Long upc;
- private BigDecimal price;
+    private Long upc;
+    private BigDecimal price;
 
- private Integer quantityOnHand;
+    private Integer quantityOnHand;
 
 
 }
