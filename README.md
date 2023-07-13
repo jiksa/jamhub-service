@@ -1,3 +1,3 @@
-#Jam Hub Service
+# JamHub Service
 
 Spring boot microservice example
