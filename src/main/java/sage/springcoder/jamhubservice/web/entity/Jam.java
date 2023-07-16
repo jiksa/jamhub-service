@@ -37,7 +37,7 @@ public class Jam {
 
     private String jamName;
 
-    private JamFlavorEnum jamFlavor;
+    private String jamFlavor;
 
     @Column(unique = true)
     private Long upc;
