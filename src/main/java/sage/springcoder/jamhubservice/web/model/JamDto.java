@@ -1,5 +1,8 @@
 package sage.springcoder.jamhubservice.web.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,15 +18,20 @@ import java.util.UUID;
 @Builder
 public class JamDto {
 
+    @Null
     private UUID jamId;
+
     private Integer version;
     private OffsetDateTime createdDate;
     private OffsetDateTime lastModifiedDate;
 
+    @NotBlank
     private String jamName;
 
-    private JamFlavorEnum jamFlavor;
+    @NotBlank
+    private String jamFlavor;
 
+    @Positive
     private Long upc;
     private BigDecimal price;
 
