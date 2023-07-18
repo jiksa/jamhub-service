@@ -3,25 +3,34 @@ package sage.springcoder.jamhubservice.web.controller;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import sage.springcoder.jamhubservice.web.model.JamDto;
+import sage.springcoder.jamhubservice.web.service.JamService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @RequestMapping("/api/v1/jam")
 @RestController
 public class JamController {
 
+    private final JamService jamService;
+
+    public JamController(JamService jamService) {
+        this.jamService = jamService;
+    }
+
     @GetMapping({"/{jamId}"})
     public ResponseEntity<JamDto> getJamById(@NotNull  @PathVariable("jamId") UUID jamId) {
-        //todo impl
-        return new ResponseEntity<>(JamDto.builder().build(), HttpStatus.OK);
+        return new ResponseEntity<>(jamService.getJamById(jamId), HttpStatus.OK);
     }
 
     @PostMapping
