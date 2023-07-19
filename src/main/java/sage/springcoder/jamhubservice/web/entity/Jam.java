@@ -9,6 +9,7 @@ import sage.springcoder.jamhubservice.web.model.JamFlavorEnum;
 
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -30,10 +31,10 @@ public class Jam {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private OffsetDateTime createdDate;
+    private Timestamp createdDate;
 
     @UpdateTimestamp
-    private OffsetDateTime lastModifiedDate;
+    private Timestamp lastModifiedDate;
 
     private String jamName;
 
