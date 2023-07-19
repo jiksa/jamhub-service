@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # Specify the official OpenJDK image for Java 17
-      - image: openjdk:17-jdk
+      - image: maven:3.8.4-openjdk-17-slim
 
     working_directory: ~/repo
 
