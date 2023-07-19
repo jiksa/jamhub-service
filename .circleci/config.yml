@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # Specify the official OpenJDK image for Java 17
-      - image: openjdk:17-jdk-slim
+      - image: openjdk:17-jdk
 
     working_directory: ~/repo
 
@@ -13,11 +13,6 @@ jobs:
 
     steps:
       - checkout
-
-    #Install maven
-      - run:
-          apt-get update
-          apt-get install -y maven
 
       # Download and cache dependencies
       - restore_cache:
