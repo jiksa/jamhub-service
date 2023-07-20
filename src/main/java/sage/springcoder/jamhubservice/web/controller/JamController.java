@@ -3,6 +3,7 @@ package sage.springcoder.jamhubservice.web.controller;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,13 +21,10 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("/api/v1/jam")
 @RestController
+@RequiredArgsConstructor
 public class JamController {
 
     private final JamService jamService;
-
-    public JamController(JamService jamService) {
-        this.jamService = jamService;
-    }
 
     @GetMapping({"/{jamId}"})
     public ResponseEntity<JamDto> getJamById(@NotNull  @PathVariable("jamId") UUID jamId) {
@@ -35,14 +33,13 @@ public class JamController {
 
     @PostMapping
     public ResponseEntity saveNewJam(@Validated @RequestBody JamDto jam) {
-        //todo impl
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity(jamService.saveNewJam(jam),HttpStatus.CREATED);
     }
 
     @PutMapping("/{jamId}")
     public ResponseEntity updateJam(@PathVariable("jamId") UUID jamId, @Validated @RequestBody JamDto jam) {
         //todo impl
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(jamService.updateJam(jamId,jam),HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{jamId}")
@@ -59,5 +56,8 @@ public class JamController {
 //        });
 //        return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
 //    }
+
+
+
 
 }
