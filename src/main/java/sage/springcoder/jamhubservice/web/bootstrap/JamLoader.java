@@ -12,6 +12,10 @@ import java.util.UUID;
 @Component
 public class JamLoader implements CommandLineRunner {
 
+    public static final String JAM_1_UPC = "0631234200036";
+    public static final String JAM_2_UPC = "0631234300019";
+    public static final String JAM_3_UPC = "0083783375213";
+
     private final JamRepository jamRepository;
 
     public JamLoader(JamRepository jamRepository) {
@@ -31,7 +35,7 @@ public class JamLoader implements CommandLineRunner {
                             .jamFlavor(JamFlavorEnum.Tropical_Tango_pineapple_mango_passion_fruit.toString())
                             .quantityOnHand(100)
                             .minOnHand(10)
-                            .upc(1000345L)
+                            .upc(JAM_1_UPC)
                             .price(new BigDecimal("78.00"))
                     .build());
             jamRepository.save(Jam.builder()
@@ -40,7 +44,7 @@ public class JamLoader implements CommandLineRunner {
                     .jamFlavor(JamFlavorEnum.Strawberry_Delight.toString())
                     .quantityOnHand(100)
                     .minOnHand(10)
-                    .upc(1000346L)
+                    .upc(JAM_2_UPC)
                     .price(new BigDecimal("57.00"))
                     .build());
             jamRepository.save(Jam.builder()
@@ -49,27 +53,27 @@ public class JamLoader implements CommandLineRunner {
                     .jamFlavor(JamFlavorEnum.Blackberry_Bliss.toString())
                     .quantityOnHand(100)
                     .minOnHand(10)
-                    .upc(1000347L)
+                    .upc(JAM_3_UPC)
                     .price(new BigDecimal("60.00"))
                     .build());
-            jamRepository.save(Jam.builder()
-                    .jamId(UUID.randomUUID())
-                    .jamName("JamSpice Bravo")
-                    .jamFlavor(JamFlavorEnum.Apple_Cinnamon_Spice.toString())
-                    .quantityOnHand(100)
-                    .minOnHand(10)
-                    .upc(1000348L)
-                    .price(new BigDecimal("89.00"))
-                    .build());
-            jamRepository.save(Jam.builder()
-                    .jamId(UUID.randomUUID())
-                    .jamName("Heavenly Apri")
-                    .jamFlavor(JamFlavorEnum.Apricot_Dream.toString())
-                    .quantityOnHand(100)
-                    .minOnHand(10)
-                    .upc(1000349L)
-                    .price(new BigDecimal("62.00"))
-                    .build());
+//            jamRepository.save(Jam.builder()
+//                    .jamId(UUID.randomUUID())
+//                    .jamName("JamSpice Bravo")
+//                    .jamFlavor(JamFlavorEnum.Apple_Cinnamon_Spice.toString())
+//                    .quantityOnHand(100)
+//                    .minOnHand(10)
+//                    .upc(1000348L)
+//                    .price(new BigDecimal("89.00"))
+//                    .build());
+//            jamRepository.save(Jam.builder()
+//                    .jamId(UUID.randomUUID())
+//                    .jamName("Heavenly Apri")
+//                    .jamFlavor(JamFlavorEnum.Apricot_Dream.toString())
+//                    .quantityOnHand(100)
+//                    .minOnHand(10)
+//                    .upc(1000349L)
+//                    .price(new BigDecimal("62.00"))
+//                    .build());
         }
         //System.out.println("Loaded Jams :" +jamRepository.count());
 

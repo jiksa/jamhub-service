@@ -39,7 +39,7 @@ public class JamDto {
     private String jamFlavor;
 
     @Positive
-    private Long upc;
+    private String upc;
 
     @JsonProperty("jamPrice")
     @JsonFormat(shape=JsonFormat.Shape.STRING)
