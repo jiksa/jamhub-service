@@ -23,7 +23,8 @@ public class Jam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(length = 36, columnDefinition = "varchar", updatable = false,nullable = false)
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false,nullable = false)
     private UUID jamId;
 
     @Version
