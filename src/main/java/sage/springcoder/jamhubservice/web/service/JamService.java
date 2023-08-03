@@ -2,7 +2,6 @@ package sage.springcoder.jamhubservice.web.service;
 
 import org.springframework.data.domain.PageRequest;
 import sage.springcoder.jamhubservice.web.model.JamDto;
-import sage.springcoder.jamhubservice.web.model.JamFlavorEnum;
 import sage.springcoder.jamhubservice.web.model.JamPagedList;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import java.util.UUID;
 public interface JamService {
 
 
-    JamDto getJamById(UUID jamId);
+    JamDto getJamById(UUID jamId, Boolean showInventoryOnHand);
 
     JamDto saveNewJam(JamDto jamDto);
 

@@ -1,22 +1,16 @@
 package sage.springcoder.jamhubservice.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import sage.springcoder.jamhubservice.web.entity.Jam;
 import sage.springcoder.jamhubservice.web.model.JamDto;
 import sage.springcoder.jamhubservice.web.model.JamFlavorEnum;
 import sage.springcoder.jamhubservice.web.service.JamService;
@@ -51,7 +45,8 @@ class JamControllerTest {
     @Test
     void getJamById() throws Exception {
         UUID jamId = UUID.randomUUID();
-        when(jamService.getJamById(jamId)).thenReturn(jamDto);
+        Boolean showInventoryOnHnd = false;
+        when(jamService.getJamById(jamId, showInventoryOnHnd)).thenReturn(jamDto);
 //        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/jam" , UUID.randomUUID().toString())
 //                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
         // Perform the request and validate the response

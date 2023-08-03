@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -21,7 +22,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class JamDto {
+public class JamDto implements Serializable {
+
+    static final long serialVersionUID = 318346312333207819L;
 
     @Null
     private UUID jamId;

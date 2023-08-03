@@ -7,9 +7,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class JamPagedList extends PageImpl<JamDto> {
+public class JamPagedList extends PageImpl<JamDto> implements Serializable {
+
+    static final long serialVersionUID= -5598297963769011378L;
 
     @JsonCreator(mode=JsonCreator.Mode.PROPERTIES)
     public JamPagedList(@JsonProperty("content") List<JamDto> content,

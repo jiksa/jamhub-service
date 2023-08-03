@@ -16,6 +16,6 @@ public class JamInventoryDto {
     private UUID id;
     private OffsetDateTime createdDate;
     private OffsetDateTime lastModifiedDate;
-    private UUID beerId;
+    private UUID jamId;
     private Integer quantityOnHand;
 }

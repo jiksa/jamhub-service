@@ -10,7 +10,6 @@ import sage.springcoder.jamhubservice.web.controller.ItemNotFoundException;
 import sage.springcoder.jamhubservice.web.entity.Jam;
 import sage.springcoder.jamhubservice.web.mappers.JamMapper;
 import sage.springcoder.jamhubservice.web.model.JamDto;
-import sage.springcoder.jamhubservice.web.model.JamFlavorEnum;
 import sage.springcoder.jamhubservice.web.model.JamPagedList;
 import sage.springcoder.jamhubservice.web.repositories.JamRepository;
 
@@ -23,16 +22,22 @@ public class JamServiceImpl implements JamService {
 
     private final JamRepository jamRepository;
     private final JamMapper jamMapper;
-
+    @Cacheable(cacheNames = "jamCache", key = "#jamId", condition = "#showInventoryOnHand == false")
     @Override
-    public JamDto getJamById(UUID jamId) {
+    public JamDto getJamById(UUID jamId, Boolean showInventoryOnHand) {
 //        return JamDto.builder().jamId(jamId)
 //                .jamName("Strawberry Blast")
 //                .jamFlavor(JamFlavorEnum.Strawberry_Delight.toString())
 //                .build();
-        return jamMapper.jamToJamDto(
-                jamRepository.findById(jamId).orElseThrow(ItemNotFoundException::new)
-        );
+        if(showInventoryOnHand) {
+            return jamMapper.jamToJamDtoWithInventory(
+                    jamRepository.findById(jamId).orElseThrow(ItemNotFoundException::new)
+            );
+        }else {
+            return jamMapper.jamToJamDto(
+                    jamRepository.findById(jamId).orElseThrow(ItemNotFoundException::new)
+            );
+        }
     }
 
     @Override
@@ -51,9 +56,10 @@ public class JamServiceImpl implements JamService {
         //and soo on..
         return jamMapper.jamToJamDto(jamRepository.save(jam));
     }
-    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false ")
+    @Cacheable(cacheNames = "jamListCache", condition = "#showInventoryOnHand == false ")
     @Override
     public JamPagedList listJams(String jamName, String jamFlavor, PageRequest pageRequest, Boolean showInventoryOnHand) {
+       // System.out.println("Called listJams method - Cache test");
 
             JamPagedList jamPagedList;
             Page<Jam> jamPage;
@@ -62,10 +68,10 @@ public class JamServiceImpl implements JamService {
                 //search both
                 jamPage = jamRepository.findAllByJamNameAndJamFlavor(jamName, jamFlavor, pageRequest);
             } else if (!StringUtils.isEmpty(jamName) && StringUtils.isEmpty(jamFlavor)) {
-                //search beer_service name
+                //search jam_service name
                 jamPage = jamRepository.findAllByJamName(jamName, pageRequest);
             } else if (StringUtils.isEmpty(jamName) && !StringUtils.isEmpty(jamFlavor)) {
-                //search beer_service style
+                //search jam_service flavor
                 jamPage = jamRepository.findAllByJamFlavor(jamFlavor, pageRequest);
             } else {
                 jamPage = jamRepository.findAll(pageRequest);
@@ -75,7 +81,7 @@ public class JamServiceImpl implements JamService {
                 jamPagedList = new JamPagedList(jamPage
                         .getContent()
                         .stream()
-                        .map(jamMapper::jamToJamDto)
+                        .map(jamMapper::jamToJamDtoWithInventory)
                         .collect(Collectors.toList()),
                         PageRequest
                                 .of(jamPage.getPageable().getPageNumber(),

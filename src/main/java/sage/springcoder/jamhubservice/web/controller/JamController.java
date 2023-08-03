@@ -33,8 +33,12 @@ public class JamController {
     private static final Integer DEFAULT_PAGE_SIZE = 25;
 
     @GetMapping({"/{jamId}"})
-    public ResponseEntity<JamDto> getJamById(@NotNull  @PathVariable("jamId") UUID jamId) {
-        return new ResponseEntity<>(jamService.getJamById(jamId), HttpStatus.OK);
+    public ResponseEntity<JamDto> getJamById(@NotNull  @PathVariable("jamId") UUID jamId,
+                                             @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
+        if(showInventoryOnHand == null){
+            showInventoryOnHand = false;
+        }
+        return new ResponseEntity<>(jamService.getJamById(jamId,showInventoryOnHand), HttpStatus.OK);
     }
 
     @PostMapping
@@ -82,9 +86,9 @@ public class JamController {
             pageSize = DEFAULT_PAGE_SIZE;
         }
 
-        JamPagedList beerList = jamService.listJams(jamName, jamFlavor, PageRequest.of(pageNumber, pageSize), showInventoryOnHand);
+        JamPagedList jamList = jamService.listJams(jamName, jamFlavor, PageRequest.of(pageNumber, pageSize), showInventoryOnHand);
 
-        return new ResponseEntity<>(beerList, HttpStatus.OK);
+        return new ResponseEntity<>(jamList, HttpStatus.OK);
     }
 
 

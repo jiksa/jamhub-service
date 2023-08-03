@@ -10,18 +10,19 @@ public abstract class JamMapperDecorator implements JamMapper{
     private JamInventoryService jamInventoryService;
     private JamMapper mapper;
 
-    //@Autowired
-    public void setBeerInventoryService(JamInventoryService jamInventoryService) {
+    @Autowired
+    public void setJamInventoryService(JamInventoryService jamInventoryService) {
         this.jamInventoryService = jamInventoryService;
     }
 
+    @Autowired
     public void setMapper(JamMapper mapper) {
         this.mapper = mapper;
     }
 
     @Override
-    public JamDto jamToJamDto(Jam beer) {
-        return mapper.jamToJamDto(beer);
+    public JamDto jamToJamDto(Jam jam) {
+        return mapper.jamToJamDto(jam);
     }
 
     @Override
