@@ -8,7 +8,7 @@ import sage.springcoder.jamhubservice.web.bootstrap.JamLoader;
 
 import java.util.UUID;
 
-//@Disabled // utility for manual testing
+@Disabled // utility for manual testing
 @SpringBootTest
 public class JamInventoryServiceRestTemplateImplTest {
 
