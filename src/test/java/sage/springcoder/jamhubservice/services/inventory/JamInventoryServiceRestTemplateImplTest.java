@@ -20,9 +20,9 @@ public class JamInventoryServiceRestTemplateImplTest {
     void getOnhandInventory() {
 
         //todo evolve to use UPC
-         Integer qoh = jamInventoryService.getOnHandInventory(JamLoader.JAM_1_UUID);
+       //  Integer qoh = jamInventoryService.getOnHandInventory(JamLoader.JAM_1_UUID);
 
-        System.out.println(qoh);
+       // System.out.println(qoh);
 
     }
 }
