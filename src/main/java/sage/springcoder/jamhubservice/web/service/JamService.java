@@ -16,4 +16,6 @@ public interface JamService {
     JamDto updateJam(UUID jamId, JamDto jamDto);
 
     JamPagedList listJams(String jamName, String jamFlavor, PageRequest pageRequest, Boolean showInventoryOnHand);
+
+    JamDto getJamByUpc(String upc);
 }

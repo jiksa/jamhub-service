@@ -91,6 +91,12 @@ public class JamController {
         return new ResponseEntity<>(jamList, HttpStatus.OK);
     }
 
+    @GetMapping({"jamUpc/{upc}"})
+    public ResponseEntity<JamDto> getJamByUpc(@NotNull  @PathVariable("upc") String upc) {
+
+        return new ResponseEntity<>(jamService.getJamByUpc(upc), HttpStatus.OK);
+    }
+
 
 
 }

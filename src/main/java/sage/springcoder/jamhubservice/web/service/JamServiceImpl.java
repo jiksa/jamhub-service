@@ -102,4 +102,14 @@ public class JamServiceImpl implements JamService {
             return jamPagedList;
 
         }
+
+    /**
+     * @param upc
+     * @return
+     */
+   // @Cacheable(cacheNames = "jamUpcCache")
+    @Override
+    public JamDto getJamByUpc(String upc) {
+        return jamMapper.jamToJamDto(jamRepository.findByUpc(upc));
+    }
 }
